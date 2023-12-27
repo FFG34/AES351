@@ -4,13 +4,13 @@ using System.Windows.Forms;
 
 public class CommandParser
 {
-    private TextBox programInputBox;
-    private PictureBox canvasDisplay;
+    private TextBox codeTextBox;
+    private PictureBox displayArea;
 
-    public CommandParser(TextBox programInputBox, PictureBox canvasDisplay)
+    public CommandParser(TextBox codeTextBox, PictureBox displayArea)
     {
-        this.programInputBox = programInputBox;
-        this.canvasDisplay = canvasDisplay;
+        this.codeTextBox = codeTextBox;
+        this.displayArea = displayArea;
     }
 
     // Handles the execution of an individual command
@@ -22,7 +22,7 @@ public class CommandParser
     // Processes a batch of commands from the program input area
     public void RunProgram()
     {
-        var lines = programInputBox.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+        var lines = codeTextBox.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
         foreach (var line in lines)
         {
             ProcessCommand(line.Trim());
@@ -32,19 +32,19 @@ public class CommandParser
     // Records the program from the input area to a file
     public void ArchiveProgram(string targetPath)
     {
-        File.WriteAllText(targetPath, programInputBox.Text);
+        File.WriteAllText(targetPath, codeTextBox.Text);
     }
 
     // Retrieves a program from a file and places it into the input area
     public void RetrieveProgram(string sourcePath)
     {
-        programInputBox.Text = File.ReadAllText(sourcePath);
+        codeTextBox.Text = File.ReadAllText(sourcePath);
     }
 
     // Validates the syntax in the program input area
     public void ValidateSyntax()
     {
-        var lines = programInputBox.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+        var lines = codeTextBox.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
         foreach (var line in lines)
         {
             // Implement the validation logic for the syntax
