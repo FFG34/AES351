@@ -6,9 +6,11 @@ namespace AES351
 {
     public partial class Form1 : Form
     {
+        private CommandParser executor;
         public Form1()
         {
             InitializeComponent();
+            executor = new CommandParser(codeTextBox, displayArea);
         }
 
         private void Form1_Load(object sender, EventArgs e)
