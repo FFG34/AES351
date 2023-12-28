@@ -6,36 +6,73 @@ namespace AES351
 {
     public partial class Form1 : Form
     {
-        private CommandParser executor;
+        private CommandParser parser;
+
         public Form1()
         {
             InitializeComponent();
-            executor = new CommandParser(codeTextBox, displayArea);
+            parser = new CommandParser(codeTextBox, displayArea);
+            this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
+            displayArea.Paint += new PaintEventHandler(displayArea_Paint);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Form load
+            // Initialization that occurs when the form loads can be placed here.
         }
 
-        private void click_RunButton(object sender, EventArgs e)
+        private void RunButton_Click(object sender, EventArgs e)
         {
-            // Button "Run"
+            try
+            {
+                string commandLine = commandTextBox.Text; 
+                parser.ProcessCommand(commandLine);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error executing the program: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void click_SyntaxButton(object sender, EventArgs e)
+
+        private void SyntaxButton_Click(object sender, EventArgs e)
         {
-            // Button "Syntax"
+            try
+            {
+                parser.ValidateSyntax();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Syntax error: " + ex.Message, "Syntax Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void text_CommandTextBox(object sender, EventArgs e)
+
+        private void commandTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            // Text box "Command"
+            if (e.KeyCode == Keys.Enter)
+            {
+                var commandText = commandTextBox.Text;
+                try
+                {
+                    parser.ProcessCommand(commandText);
+                    commandTextBox.Clear();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error executing command: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
-        private void click_Display(object sender, EventArgs e)
+        private void displayArea_Paint(object sender, PaintEventArgs g)
         {
-            // Picture box for display
+            parser.SetupGraphics(g.Graphics);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            parser.Cleanup();
         }
     }
 }
