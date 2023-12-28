@@ -1,0 +1,45 @@
+
+<commands>
+    <command name="moveTo">
+        <summary>Relocates the pen to the designated coordinates.</summary>
+        <param name="x">Target x-coordinate.</param>
+        <param name="y">Target y-coordinate.</param>
+    </command>
+    <command name="drawTo">
+        <summary>Renders a line to a target position from the current location.</summary>
+        <param name="x">Target x-coordinate for the line end.</param>
+        <param name="y">Target y-coordinate for the line end.</param>
+    </command>
+    <command name="clear">
+        <summary>Resets the drawing space, removing all drawings.</summary>
+    </command>
+    <command name="rectangle">
+        <summary>Renders a rectangle at the current pen location.</summary>
+        <param name="width">Width of the rectangle.</param>
+        <param name="height">Height of the rectangle.</param>
+    </command>
+    <command name="circle">
+        <summary>Creates a circle based on a given radius.</summary>
+        <param name="radius">Radius of the circle.</param>
+    </command>
+    <command name="triangle">
+        <summary>Constructs a triangle using three sets of coordinates.</summary>
+        <param name="x1">First vertex x-coordinate.</param>
+        <param name="y1">First vertex y-coordinate.</param>
+        <param name="x2">Second vertex x-coordinate.</param>
+        <param name="y2">Second vertex y-coordinate.</param>
+        <param name="x3">Third vertex x-coordinate.</param>
+        <param name="y3">Third vertex y-coordinate.</param>
+    </command>
+    <command name="color">
+        <summary>Changes the pen's color to a specified option.</summary>
+        <param name="color">Color name for the pen.</param>
+    </command>
+    <command name="reset">
+        <summary>Repositions the pen back to the initial location.</summary>
+    </command>
+    <command name="fill">
+        <summary>Switches the filling mode for drawn shapes.</summary>
+        <param name="state">Desired state of filling, 'on' or 'off'.</param>
+    </command>
+</commands>
